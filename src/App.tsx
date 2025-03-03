@@ -72,11 +72,16 @@ export async function parseSchema(content: string): Promise<ParsedSchema> {
           const api = await SwaggerParser.parse(data);
           for (const path in api.paths) {
             const pathItem = api.paths[path];
+            pathItem?.parameters
             for (const method in pathItem) {
+              if (method === "parameters") {
+                continue;
+              }
               totalEndpoints++;
               if (method.toLowerCase() === "get") {
                 totalQueries++;
               } else {
+                console.log(pathItem);
                 totalMutations++;
               }
               const operation = (pathItem as any)[method];
@@ -186,6 +191,7 @@ function App() {
       <div className="flex flex-col space-y-2.5 pt-2.5">
         <div className="flex justify-between">
           <select
+          key={`select-schema-${schema.length}`}
             id="countries"
             onChange={(e) =>
               setSchema(
@@ -249,7 +255,7 @@ function App() {
         </div>
         <div className="relative pt-5">
           <div
-            className={`absolute z-50 top-6 right-5 text-xs text-background p-2.5 rounded-full border ${parsedSchema.type ===
+            className={`absolute z-50 top-6 right-5 text-xs text-white p-2.5 rounded-full border ${parsedSchema.type ===
               "openapi"
                 ? "bg-green-500"
                 : parsedSchema.type === "postman"
