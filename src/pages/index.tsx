@@ -298,7 +298,7 @@ function App() {
             {parsedSchema.analytics.totalMutations}
           </p>
         </div>
-        <div className="col-span-1 md:col-span-2 xl:col-span-3 h-[82vh] overflow-scroll">
+        <div className="col-span-2 xl:col-span-3 h-[82vh] overflow-scroll">
           {parsedSchema.endpoints.map((endpoint, index) => (
             <div key={`endpoint-${index}`}>
               <div className="bg-white px-4 pb-4 rounded-lg flex space-x-2.5 items-center">
