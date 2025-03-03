@@ -255,7 +255,7 @@ function App() {
         </div>
         <div className="relative pt-5">
           <div
-            className={`absolute z-50 top-6 right-5 text-xs text-white p-2.5 rounded-full border ${parsedSchema.type ===
+            className={`absolute z-50 top-6 right-5 text-xs text-white  p-2.5 rounded-full border ${parsedSchema.type ===
               "openapi"
                 ? "bg-green-500"
                 : parsedSchema.type === "postman"
