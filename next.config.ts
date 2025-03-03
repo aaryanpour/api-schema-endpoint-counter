@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   basePath: "/api-schema-endpoint-counter",
+  assetPrefix: "/api-schema-endpoint-counter",
   reactStrictMode: false,
   output: "export",
   webpack: (config) => {
