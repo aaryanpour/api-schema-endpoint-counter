@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import * as SwaggerParser from "@apidevtools/swagger-parser";
+import { parse as swaggerParse } from "@apidevtools/swagger-parser";
 import { Collection } from "postman-collection";
 import { buildSchema, buildClientSchema, GraphQLSchema } from "graphql";
 import { parse } from "yaml";
-import openapiJson from "@/assets/openapi.json?raw";
-import openapiYaml from "@/assets/openapi.yml?raw";
-import postmanJson from "@/assets/postman.json?raw";
-import graphqlIntrospection from "@/assets/graphql-introspection.json?raw";
-import graphqlSdl from "@/assets/graphql-sdl.graphql?raw";
+import openapiJson from "@/assets/openapi.json";
+import openapiYaml from "@/assets/openapi.yml";
+import postmanJson from "@/assets/postman.json";
+import graphqlIntrospection from "@/assets/graphql-introspection.json";
+import graphqlSdl from "@/assets/graphql-sdl.graphql";
 const sampleSchemas = {
   "openapi-json": openapiJson,
   "openapi-yaml": openapiYaml,
   "postman-json": postmanJson,
   "graphql-introspection": graphqlIntrospection,
   "graphql-sdl": graphqlSdl,
-};
+} as unknown as Record<string, string>;
 
 export type SchemaTypes = "openapi" | "postman" | "graphql" | "unknown";
 interface Analytics {
@@ -69,10 +69,10 @@ export async function parseSchema(content: string): Promise<ParsedSchema> {
     switch (type) {
       case "openapi":
         {
-          const api = await SwaggerParser.parse(data);
+          const api = await swaggerParse(data);
           for (const path in api.paths) {
             const pathItem = api.paths[path];
-            pathItem?.parameters
+            pathItem?.parameters;
             for (const method in pathItem) {
               if (method === "parameters") {
                 continue;
@@ -191,7 +191,7 @@ function App() {
       <div className="flex flex-col space-y-2.5 pt-2.5">
         <div className="flex justify-between">
           <select
-          key={`select-schema-${schema.length}`}
+            key={`select-schema-${schema.length}`}
             id="countries"
             onChange={(e) =>
               setSchema(
@@ -255,8 +255,8 @@ function App() {
         </div>
         <div className="relative pt-5">
           <div
-            className={`absolute z-50 top-6 right-5 text-xs text-white  p-2.5 rounded-full border ${parsedSchema.type ===
-              "openapi"
+            className={`absolute z-50 top-6 right-5 text-xs text-white  p-2.5 rounded-full border ${
+              parsedSchema.type === "openapi"
                 ? "bg-green-500"
                 : parsedSchema.type === "postman"
                 ? "bg-orange-500"
@@ -264,7 +264,8 @@ function App() {
                 ? "bg-pink-500"
                 : parsedSchema.type === "unknown"
                 ? "hidden"
-                : "hidden"}`}
+                : "hidden"
+            }`}
           >
             {parsedSchema.type}
           </div>
