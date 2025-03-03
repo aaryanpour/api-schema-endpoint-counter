@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predeploy": "next build",
+    "predeploy": "next build && touch ./out/.nojekyll",
     "dev": "next dev",
     "build": "next build",
     "start": "npx serve@latest out",
-    "deploy": "touch ./out/.nojekyll && gh-pages -d out"
+    "deploy": "gh-pages -d out -t true"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.1.1",
