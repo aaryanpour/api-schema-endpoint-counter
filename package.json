@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "npx serve@latest out",
-    "deploy": "gh-pages -d out -t true"
+    "deploy": "gh-pages -d out --nojekyll"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "^10.1.1",
